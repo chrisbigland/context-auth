@@ -1,11 +1,19 @@
 import './App.css';
 import ThemeProvider from './context/ThemeProvider.js';
+import UserProvider from './context/UserProvider.js';
+
 
 function App() {
   return (
+
+
+
     <div className="App">
-        <ThemeProvider />   
+        <ThemeProvider >
+          <UserProvider />
+        </ThemeProvider>  
     </div>
+
   );
 }
 
