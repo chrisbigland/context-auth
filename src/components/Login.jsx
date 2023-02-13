@@ -3,6 +3,7 @@ import { UserContext } from "../context/UserProvider";
 import { app } from "../firebase";
 import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import "./Login.scss"
 
 
 const Login = () => {
@@ -56,15 +57,19 @@ const Login = () => {
 
   return (
     <>
+    <div className="emailLogin">
+      <form onSubmit={handleSubmit}>
+        <input placeholder="email..." />
+        <input placeholder="password..." />
+        <button type="submit">Login</button>
+      </form>
+    </div>
+
+    <div className="googleLogin">
     <button onClick={handleClick}>
     Sign in with Google
     </button>
-
-    <form onSubmit={handleSubmit}>
-      <input placeholder="email..." />
-      <input placeholder="password..." />
-      <button type="submit">Login</button>
-    </form>
+    </div>
     
     </>
   )
