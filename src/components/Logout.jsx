@@ -1,29 +1,36 @@
-import React, { useContext } from 'react'
-import { useNavigate } from 'react-router-dom';
-import { UserContext } from '../context/UserProvider';
+import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { UserContext } from "../context/UserProvider";
+import { signOut, getAuth } from "firebase/auth"
+import { app } from "../firebase";
 
 const Logout = () => {
-    const navigate = useNavigate()
-    const userContext = useContext(UserContext)
+  const navigate = useNavigate();
+  const userContext = useContext(UserContext);
 
-    const handleLogOut = () => {
-        userContext.isLoggedIn = false
-        userContext.setUser("")
-        console.log(userContext)
-        alert("You have successfully logged out")
-        navigate("/login")
-    }
+  const handleLogOut = () => {
+
+    signOut(getAuth(app))
+    .then(() => {
+      console.log("signout successful");
+      userContext.isLoggedIn = false;
+      userContext.setUser("");
+      alert("You have successfully logged out");
+      navigate("/login");
+    })
+    .catch((error) => {
+      console.log("an error occurred");
+    });
+  };
+
 
   return (
+    <>
+      <div>
+        <button onClick={handleLogOut}>Logout with Email</button>
+      </div>
+    </>
+  );
+};
 
-
-
-    <div>
-    <button onClick={handleLogOut}>
-        Logout
-    </button>
-    </div>
-  )
-}
-
-export default Logout
+export default Logout;
